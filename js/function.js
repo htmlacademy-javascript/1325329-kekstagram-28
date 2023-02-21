@@ -8,9 +8,9 @@ isCheckStringLength('string to test', 20);
 isCheckStringLength('string to test', 18);
 isCheckStringLength('string to test', 10);
 
-console.log(isCheckStringLength('string to test', 20));
-console.log(isCheckStringLength('string to test', 18));
-console.log(isCheckStringLength('string to test', 10));
+// console.log(isCheckStringLength('string to test', 20));
+// console.log(isCheckStringLength('string to test', 18));
+// console.log(isCheckStringLength('string to test', 10));
 
 //Функция для проверки, является ли строка палиндромом.
 
@@ -32,10 +32,10 @@ isPalindrom('ДовОд');
 isPalindrom('Кекс');
 isPalindrom('Лёша на полке клопа нашёл ');
 
-console.log(isPalindrom('топот'));
-console.log(isPalindrom('ДовОд'));
-console.log(isPalindrom('Кекс'));
-console.log(isPalindrom('Лёша на полке клопа нашёл'));
+// console.log(isPalindrom('топот'));
+// console.log(isPalindrom('ДовОд'));
+// console.log(isPalindrom('Кекс'));
+// console.log(isPalindrom('Лёша на полке клопа нашёл'));
 
 //Функция, которая принимает строку, извлекает содержащиеся в ней цифры от 0 до 9
 //и возвращает их в виде целого положительного числа.
@@ -63,13 +63,13 @@ extractNumber('2023');
 extractNumber('-1');
 extractNumber('1.5');
 
-console.log(extractNumber('2023 год'));
-console.log(extractNumber('ECMAScript 2022'));
-console.log(extractNumber('1 кефир, 0.5 батона'));
-console.log(extractNumber('а я томат'));
-console.log(extractNumber('2023'));
-console.log(extractNumber('-1'));
-console.log(extractNumber('1.5'));
+// console.log(extractNumber('2023 год'));
+// console.log(extractNumber('ECMAScript 2022'));
+// console.log(extractNumber('1 кефир, 0.5 батона'));
+// console.log(extractNumber('а я томат'));
+// console.log(extractNumber('2023'));
+// console.log(extractNumber('-1'));
+// console.log(extractNumber('1.5'));
 
 //Функция, которая принимает три параметра:
 //исходную строку, минимальную длину и строку с добавочными символами.
@@ -92,8 +92,8 @@ myPadStart('q', 4, 'werty');
 myPadStart('q', 4, 'we');
 myPadStart('qwerty', 4, '0');
 
-console.log(myPadStart('1', 2, '0'));
-console.log(myPadStart('1', 4, '0'));
-console.log(myPadStart('q', 4, 'werty'));
-console.log(myPadStart('q', 4, 'we'));
-console.log(myPadStart('qwerty', 4, '0'));
+// console.log(myPadStart('1', 2, '0'));
+// console.log(myPadStart('1', 4, '0'));
+// console.log(myPadStart('q', 4, 'werty'));
+// console.log(myPadStart('q', 4, 'we'));
+// console.log(myPadStart('qwerty', 4, '0'));
