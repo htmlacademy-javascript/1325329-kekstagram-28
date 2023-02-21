@@ -1,8 +1,6 @@
 // Функция для проверки длины строки.
 
-const isCheckStringLength = (string, length) => {
-  return string.length <= length;
-};
+const  isCheckStringLength = (string, length) => string.length <= length;
 
 isCheckStringLength('string to test', 20);
 isCheckStringLength('string to test', 18);
