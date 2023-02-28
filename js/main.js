@@ -1,5 +1,8 @@
-/* eslint-disable no-console */
-const names = [
+const LIKE_MIN_COUNT = 15;
+const LIKE_MAX_COUNT = 200;
+const AVATAR_MAX = 6;
+const SIMILAR_POST_COUNT = 25;
+const NAMES = [
   'Павел',
   'Артём',
   'Иван',
@@ -8,8 +11,7 @@ const names = [
   'Никита',
   'Алексей',
 ];
-
-const messages = [
+const MESSAGES = [
   'Всё отлично!',
   'В целом всё неплохо. Но не всё.',
   'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
@@ -17,8 +19,7 @@ const messages = [
   'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!',
 ];
-
-const descriptions = [
+const DESCRIPTIONS = [
   'Я не верю в будущее, я верю в сегодня',
   'Если жизнь подкидывает мне лимоны, я делаю из них лимонад',
   'На 80% состою из важных дел',
@@ -30,12 +31,14 @@ const descriptions = [
 
 const getRandomInteger = (min, max) => Math.floor(Math.random() * max - min + 1) + min;
 
-function createRandomIdGenerator(min, max) {
+const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
+
+const createRandomIdGenerator = (min, max) => {
   const previousValues = [];
   return function () {
     let currentValue = getRandomInteger(min, max);
     if (previousValues.length >= (max - min + 1)) {
-      console.error(`Перебраны все числа из диапазона от ${ min } до ${ max}`);
+
       return null;
     }
     while (previousValues.includes(currentValue)) {
@@ -44,10 +47,7 @@ function createRandomIdGenerator(min, max) {
     previousValues.push(currentValue);
     return currentValue;
   };
-}
-
-const SIMILAR_POST_COUNT = 25;
-const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
+};
 
 const generateId = createRandomIdGenerator(1, 25);
 const generateUrl = createRandomIdGenerator(1, 25);
@@ -56,18 +56,16 @@ const generateIdComments = createRandomIdGenerator(1, 500);
 const createPostPhotos = () => ({
   id: generateId(),
   url: `photos/${generateUrl()}.jpg`,
-  description: `${getRandomArrayElement(descriptions)}`,
-  likes: getRandomInteger(15, 200),
+  description: `${getRandomArrayElement(DESCRIPTIONS)}`,
+  likes: getRandomInteger(LIKE_MIN_COUNT, LIKE_MAX_COUNT),
   comments: {
     id: generateIdComments(),
-    avatar: `img/avatar-${getRandomInteger(1, 6)}.svg`,
-    message: `${getRandomArrayElement(messages)}`,
-    name: `${getRandomArrayElement(names)}`,
+    avatar: `img/avatar-${getRandomInteger(1, AVATAR_MAX)}.svg`,
+    message: `${getRandomArrayElement(MESSAGES)}`,
+    name: `${getRandomArrayElement(NAMES)}`,
   }
 });
 
-const similarPost = Array.from({ length: SIMILAR_POST_COUNT }, createPostPhotos);
+const similarPost = () => Array.from({ length: SIMILAR_POST_COUNT }, createPostPhotos);
 
-console.log(similarPost);
-
-
+similarPost();
