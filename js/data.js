@@ -2,7 +2,8 @@ import {getRandomInteger, createRandomIdGenerator} from './util.js';
 
 const LIKE_MIN_COUNT = 15;
 const LIKE_MAX_COUNT = 200;
-const AVATAR_MAX = 6;
+const AVATAR_MIN_COUNT = 1;
+const AVATAR_MAX_COUNT = 6;
 const SIMILAR_POST_COUNT = 25;
 const NAMES = [
   'Павел',
@@ -44,7 +45,7 @@ const createPostPhotos = () => ({
   likes: getRandomInteger(LIKE_MIN_COUNT, LIKE_MAX_COUNT),
   comments: {
     id: generateIdComments(),
-    avatar: `img/avatar-${getRandomInteger(1, AVATAR_MAX)}.svg`,
+    avatar: `img/avatar-${getRandomInteger(AVATAR_MIN_COUNT, AVATAR_MAX_COUNT)}.svg`,
     message: `${getRandomArrayElement(MESSAGES)}`,
     name: `${getRandomArrayElement(NAMES)}`,
   }
