@@ -1,5 +1,5 @@
 import { similarPost } from './data.js';
-import { otherPictures } from './picture.js';
+import { picturesRendering } from './picture.js';
 
 similarPost();
-otherPictures();
+picturesRendering();
