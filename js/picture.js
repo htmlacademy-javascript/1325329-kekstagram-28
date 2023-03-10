@@ -5,9 +5,10 @@ const picturesRendering = similarPost();
 const pictureListFragment = document.createDocumentFragment();
 const picturesContainer = document.querySelector('.pictures');
 
-picturesRendering.forEach(({ url, likes, comments }) => {
+picturesRendering.forEach(({ url, likes, comments, description }) => {
   const pictureElement = picturesTemplate.cloneNode(true);
   pictureElement.querySelector('.picture__img').src = url;
+  pictureElement.querySelector('.picture__img').alt = description;
   pictureElement.querySelector('.picture__likes').textContent = likes;
   pictureElement.querySelector('.picture__comments').textContent = comments;
   pictureListFragment.appendChild(pictureElement);
