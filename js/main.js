@@ -1,3 +1,3 @@
-import {similarPost} from './data.js';
+import { renderingMiniatures } from './miniatures.js';
 
-similarPost();
+renderingMiniatures();

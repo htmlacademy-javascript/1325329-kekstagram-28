@@ -1,8 +1,9 @@
-import {getRandomInteger, createRandomIdGenerator} from './util.js';
+import { getRandomInteger, createRandomIdGenerator } from './util.js';
 
 const LIKE_MIN_COUNT = 15;
 const LIKE_MAX_COUNT = 200;
-const AVATAR_MAX = 6;
+const AVATAR_MIN_COUNT = 1;
+const AVATAR_MAX_COUNT = 6;
 const SIMILAR_POST_COUNT = 25;
 const NAMES = [
   'Павел',
@@ -37,19 +38,23 @@ const generateId = createRandomIdGenerator(1, 25);
 const generateUrl = createRandomIdGenerator(1, 25);
 const generateIdComments = createRandomIdGenerator(1, 500);
 
+const createComment = () => ({
+  id: generateIdComments(),
+  avatar: `img/avatar-${getRandomInteger(AVATAR_MIN_COUNT, AVATAR_MAX_COUNT)}.svg`,
+  message: `${getRandomArrayElement(MESSAGES)}`,
+  name: `${getRandomArrayElement(NAMES)}`,
+});
+
+const createArrayComments = () => Array.from({ length: getRandomInteger (1, 10) }, () => createComment());
+
 const createPostPhotos = () => ({
   id: generateId(),
   url: `photos/${generateUrl()}.jpg`,
   description: `${getRandomArrayElement(DESCRIPTIONS)}`,
   likes: getRandomInteger(LIKE_MIN_COUNT, LIKE_MAX_COUNT),
-  comments: {
-    id: generateIdComments(),
-    avatar: `img/avatar-${getRandomInteger(1, AVATAR_MAX)}.svg`,
-    message: `${getRandomArrayElement(MESSAGES)}`,
-    name: `${getRandomArrayElement(NAMES)}`,
-  }
+  comments: createArrayComments(),
 });
 
 const similarPost = () => Array.from({ length: SIMILAR_POST_COUNT }, createPostPhotos);
 
-export {similarPost};
+export { similarPost };
