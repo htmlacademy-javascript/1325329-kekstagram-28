@@ -18,4 +18,4 @@ const renderingMiniatures = () => {
   picturesContainer.appendChild(pictureListFragment);
 };
 
-export { renderingMiniatures };
+export { renderingMiniatures, picturesContainer, pictureListFragment };

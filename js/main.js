@@ -1,3 +1,4 @@
-import { renderingMiniatures } from './miniatures.js';
+import { renderingMiniatures } from './miniatures-mini.js';
+import './miniatures-full.js';
 
 renderingMiniatures();
