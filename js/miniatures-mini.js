@@ -1,12 +1,8 @@
-// import { similarPost } from './data.js';
-
 const picturesContainer = document.querySelector('.pictures');
 const picturesTemplate = document.querySelector('#picture').content.querySelector('.picture');
-// const picturesRendering = similarPost();
 const pictureListFragment = document.createDocumentFragment();
 
 const renderingMiniatures = (descriptionData) => {
-  // const listElements = pictures;
   descriptionData.forEach((dataItem) => {
     const pictureElement = picturesTemplate.cloneNode(true);
     pictureElement.querySelector('.picture__img').src = dataItem.url;
