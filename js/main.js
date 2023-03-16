@@ -1,3 +1,8 @@
-import { renderingMiniatures } from './miniatures.js';
+import { similarPost } from './data.js';
+import { renderingMiniatures } from './miniatures-mini.js';
+import './miniatures-full.js';
 
-renderingMiniatures();
+const descriptionData = similarPost();
+renderingMiniatures(descriptionData);
+
+export {descriptionData};
