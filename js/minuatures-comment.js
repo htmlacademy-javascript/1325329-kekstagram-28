@@ -1,3 +1,9 @@
+const COMMENTS_SHOW_COUNT = 5;
+const bigPicturesContainer = document.querySelector('.big-picture');
+const commentsCount = bigPicturesContainer.querySelector('.social__comment-count');
+const socialComments = bigPicturesContainer.querySelector('.social__comments');
+const moreComments = bigPicturesContainer.querySelector('.comments-loader');
+
 const createElement = (tagName, className, text) => {
   const element = document.createElement(tagName);
   element.classList.add(className);
@@ -7,9 +13,10 @@ const createElement = (tagName, className, text) => {
   return element;
 };
 
-export const createComment = (arr, container) => {
+const createComment = (arr, container) => {
   arr.forEach((item) => {
     const listItem = createElement('li', 'social__comment');
+    listItem.classList.add('hidden');
     const picture = createElement('img', 'social__picture');
     const commentText = createElement('p', 'social__text', item.message);
 
@@ -21,4 +28,26 @@ export const createComment = (arr, container) => {
     container.appendChild(listItem);
   });
 };
+
+const showComments = (arr, count) => {
+  for (let i = 0; i < count; i++) {
+    arr[i].classList.remove('hidden');
+  }
+  commentsCount.textContent = `${socialComments.children.length - socialComments.querySelectorAll('.hidden').length} из ${socialComments.children.length} комментариев`;
+};
+
+const loadComments = () => {
+  const hiddenComments = socialComments.querySelectorAll('.hidden');
+
+  if (hiddenComments.length > COMMENTS_SHOW_COUNT) {
+    showComments(hiddenComments, COMMENTS_SHOW_COUNT);
+  } else {
+    if (hiddenComments.length <= COMMENTS_SHOW_COUNT) {
+      showComments(hiddenComments, hiddenComments.length);
+      moreComments.classList.add('hidden');
+    }
+  }
+};
+
+export { createComment, loadComments };
 

@@ -8,7 +8,7 @@ const renderingMiniatures = (descriptionData) => {
     pictureElement.querySelector('.picture__img').src = dataItem.url;
     pictureElement.querySelector('.picture__img').alt = dataItem.description;
     pictureElement.querySelector('.picture__likes').textContent = dataItem.likes;
-    pictureElement.querySelector('.picture__comments').textContent = dataItem.comments.length;
+    pictureElement.querySelector('.picture__comments').textContent = dataItem['comments'].length;
     pictureElement.dataset.id = dataItem.id;
     pictureListFragment.appendChild(pictureElement);
   });

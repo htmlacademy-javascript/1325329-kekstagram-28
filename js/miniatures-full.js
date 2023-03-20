@@ -1,5 +1,5 @@
 import { isEscapeKey, isEnterKey } from './util.js';
-import { createComment } from './minuatures-comment.js';
+import { createComment, loadComments } from './minuatures-comment.js';
 import { descriptionData } from './main.js';
 
 const picturesBlock = document.querySelector('.pictures');
@@ -9,16 +9,16 @@ const bigPicturesClose = bigPicturesContainer.querySelector('.big-picture__cance
 const bigPicturesLikes = bigPicturesContainer.querySelector('.likes-count');
 const bigPicturesComments = bigPicturesContainer.querySelector('.comments-count');
 const picturesCaption = bigPicturesContainer.querySelector('.social__caption');
-const commentsCount = bigPicturesContainer.querySelector('.social__comment-count');
 const socialComments = bigPicturesContainer.querySelector('.social__comments');
 const moreComments = bigPicturesContainer.querySelector('.comments-loader');
 
 const onClickPictures = (evt) => {
   evt.preventDefault();
-  if (evt.target.closest('a')) {
-    const target = evt.target.closest('a');
+  const target = evt.target.closest('a');
+  if (target) {
     const correctDescription = descriptionData.find((item) => item.id === Number(target.dataset.id));
     bigPicturesContainer.classList.remove('hidden');
+    moreComments.classList.remove('hidden');
 
     bigPicturesImg.src = correctDescription.url;
     bigPicturesImg.alt = correctDescription.description;
@@ -27,37 +27,43 @@ const onClickPictures = (evt) => {
     bigPicturesComments.textContent = correctDescription.comments.length;
     socialComments.innerHTML = '';
 
-    commentsCount.classList.add('hidden');
-    moreComments.classList.add('hidden');
-
     document.body.classList.add('modal-open');
 
     createComment(correctDescription.comments, socialComments);
+    loadComments();
   }
 };
 
 picturesBlock.addEventListener('click', onClickPictures);
+
+moreComments.addEventListener('click', loadComments);
 
 const onClosePictures = () => {
   bigPicturesContainer.classList.add('hidden');
   document.body.classList.remove('modal-open');
 };
 
-bigPicturesClose.addEventListener('click', onClosePictures);
+bigPicturesClose.addEventListener('click', () => {
+  onClosePictures();
+  document.body.classList.remove('modal-open');
+  moreComments.classList.remove('hidden');
+});
 
 bigPicturesClose.addEventListener('keydown', (evt) => {
   if (isEnterKey(evt)) {
     onClosePictures();
   }
   document.body.classList.remove('modal-open');
+  moreComments.classList.remove('hidden');
 });
 
 
 document.addEventListener('keydown', (evt) => {
   if (isEscapeKey(evt)) {
     bigPicturesContainer.classList.add('hidden');
-    document.querySelector('body').classList.remove('modal-open');
   }
+  document.body.classList.remove('modal-open');
+  moreComments.classList.remove('hidden');
 });
 
 export { onClickPictures };
