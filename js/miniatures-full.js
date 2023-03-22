@@ -13,9 +13,9 @@ const socialComments = bigPicturesContainer.querySelector('.social__comments');
 const moreComments = bigPicturesContainer.querySelector('.comments-loader');
 
 const onClickPictures = (evt) => {
-  evt.preventDefault();
   const target = evt.target.closest('a');
   if (target) {
+    evt.preventDefault();
     const correctDescription = descriptionData.find((item) => item.id === Number(target.dataset.id));
     bigPicturesContainer.classList.remove('hidden');
     moreComments.classList.remove('hidden');
@@ -28,14 +28,12 @@ const onClickPictures = (evt) => {
     socialComments.innerHTML = '';
 
     document.body.classList.add('modal-open');
-
     createComment(correctDescription.comments, socialComments);
     loadComments();
   }
 };
 
 picturesBlock.addEventListener('click', onClickPictures);
-
 moreComments.addEventListener('click', loadComments);
 
 const onClosePictures = () => {
@@ -56,7 +54,6 @@ bigPicturesClose.addEventListener('keydown', (evt) => {
   document.body.classList.remove('modal-open');
   moreComments.classList.remove('hidden');
 });
-
 
 document.addEventListener('keydown', (evt) => {
   if (isEscapeKey(evt)) {
