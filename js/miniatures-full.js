@@ -39,28 +39,23 @@ moreComments.addEventListener('click', loadComments);
 const onClosePictures = () => {
   bigPicturesContainer.classList.add('hidden');
   document.body.classList.remove('modal-open');
+  moreComments.classList.remove('hidden');
 };
 
 bigPicturesClose.addEventListener('click', () => {
   onClosePictures();
-  document.body.classList.remove('modal-open');
-  moreComments.classList.remove('hidden');
 });
 
 bigPicturesClose.addEventListener('keydown', (evt) => {
   if (isEnterKey(evt)) {
     onClosePictures();
   }
-  document.body.classList.remove('modal-open');
-  moreComments.classList.remove('hidden');
 });
 
 document.addEventListener('keydown', (evt) => {
   if (isEscapeKey(evt)) {
     bigPicturesContainer.classList.add('hidden');
   }
-  document.body.classList.remove('modal-open');
-  moreComments.classList.remove('hidden');
 });
 
 export { onClickPictures };

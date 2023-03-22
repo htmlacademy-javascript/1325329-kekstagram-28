@@ -29,7 +29,8 @@ const createComment = (arr, container) => {
   });
 };
 
-const showComments = (arr, count) => {
+const showComments = (arr) => {
+  const count = Math.min(arr.length, COMMENTS_SHOW_COUNT);
   for (let i = 0; i < count; i++) {
     arr[i].classList.remove('hidden');
   }
@@ -38,14 +39,10 @@ const showComments = (arr, count) => {
 
 const loadComments = () => {
   const hiddenComments = socialComments.querySelectorAll('.hidden');
+  showComments(hiddenComments);
 
-  if (hiddenComments.length > COMMENTS_SHOW_COUNT) {
-    showComments(hiddenComments, COMMENTS_SHOW_COUNT);
-  } else {
-    if (hiddenComments.length <= COMMENTS_SHOW_COUNT) {
-      showComments(hiddenComments, hiddenComments.length);
-      moreComments.classList.add('hidden');
-    }
+  if (hiddenComments.length <= COMMENTS_SHOW_COUNT) {
+    moreComments.classList.add('hidden');
   }
 };
 
