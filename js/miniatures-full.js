@@ -1,4 +1,4 @@
-import { isEscapeKey, isEnterKey } from './util.js';
+import { isEscapeKey } from './util.js';
 import { createComment, loadComments } from './minuatures-comment.js';
 import { descriptionData } from './main.js';
 
@@ -44,12 +44,6 @@ const onClosePictures = () => {
 
 bigPicturesClose.addEventListener('click', () => {
   onClosePictures();
-});
-
-bigPicturesClose.addEventListener('keydown', (evt) => {
-  if (isEnterKey(evt)) {
-    onClosePictures();
-  }
 });
 
 document.addEventListener('keydown', (evt) => {

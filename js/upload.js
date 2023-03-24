@@ -1,29 +1,54 @@
-// import { isEscapeKey } from "./util";
+import { isEscapeKey } from './util.js';
+// import { resetScale } from './scale.js';
+// import { resetSlider } from './slider.js';
 
 const uploadForm = document.querySelector('.img-upload__form');
 const uploadFile = uploadForm.querySelector('#upload-file');
 const uploadOverlay = uploadForm.querySelector('.img-upload__overlay');
-const uploadInput = uploadForm.querySelector('.img-upload__input');
-const uploadCancel = uploadForm.querySelector('.img-upload-cancel');
-const uploadSubmit = uploadForm.querySelector('.img-upload-submit');
-const uploadHashtags = uploadForm.querySelector('.text__hashtags');
+const uploadCancel = uploadForm.querySelector('.img-upload__cancel');
 const uploadComments = uploadForm.querySelector('.text__description');
+const uploadHashtags = uploadForm.querySelector('.text__hashtags');
 const body = document.querySelector('body');
 
-const pristine = new Pristine(uploadForm, {
-  classTo: 'img-upload__field-wrapper',
-  errorTextParent: 'img-upload__field-wrapper',
-});
+const onBlockEsc = () => {
+  uploadComments.addEventListener('keydown', (evt) => {
+    if (evt.key === 'Escape') {
+      evt.stopPropagation();
+    }
+  });
+  uploadHashtags.addEventListener('keydown', (evt) => {
+    if (evt.key === 'Escape') {
+      evt.stopPropagation();
+    }
+  });
+};
 
 const onOpenForm = () => {
   uploadOverlay.classList.remove('hidden');
   body.classList.add('modal-open');
+  document.addEventListener('keydown', onDocumentKeydown);
+  onBlockEsc();
 };
+
+uploadFile.addEventListener('change', onOpenForm);
 
 const onCloseForm = () => {
+  uploadForm.reset();
+  // resetScale();
+  // resetSlider();
   uploadOverlay.classList.add('hidden');
   body.classList.remove('modal-open');
+  document.addEventListener('keydown', onDocumentKeydown);
+  uploadFile.value = '';
 };
 
-uploadForm.addEventListener('click', onOpenForm, onCloseForm);
+uploadCancel.addEventListener('click', onCloseForm);
 
+function onDocumentKeydown(evt) {
+  if (isEscapeKey(evt)) {
+    evt.preventDefault();
+    onCloseForm();
+  }
+}
+
+export { uploadForm, uploadHashtags, uploadComments };
