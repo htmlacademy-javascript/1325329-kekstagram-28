@@ -26,25 +26,14 @@ noUiSlider.create(sliderElement, {
   connect: 'lower',
 });
 
-// const isDefault = () => currentEffect === DEFAULT_EFFECT;
-
 const isDefault = () => {
   if (currentEffect === DEFAULT_EFFECT) {
-    sliderEffectLevel.classList.remove('hidden');
+    sliderEffectLevel.classList.add('hidden');
     sliderImageElement.style.filter = 'none';
   } else {
-    sliderEffectLevel.classList.add('hidden');
+    sliderEffectLevel.classList.remove('hidden');
   }
 };
-
-// const showSlider = () => {
-//   sliderEffectLevel.classList.remove('hidden');
-// };
-
-// const hideSlider = () => {
-//   sliderEffectLevel.classList.add('hidden');
-// };
-
 
 const updateSlider = () => {
   isDefault();
@@ -72,11 +61,11 @@ const onSliderUpdate = () => {
 };
 
 const onEffectChange = (evt) => {
-  if (!evt.target.classList.contains('effects_radio')) {
+  if (!evt.target.classList.contains('effects__radio')) {
     return;
   }
-  currentEffect = FILTER_EFFECTS.find((effect) => effect.name === evt.traget.value);
-  sliderImageElement.className = `effects_preview--${currentEffect.name}`;
+  currentEffect = FILTER_EFFECTS.find((effect) => effect.name === evt.target.value);
+  sliderImageElement.className = `effects__preview--${currentEffect.name}`;
   updateSlider();
 };
 
