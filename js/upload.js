@@ -51,4 +51,4 @@ function onDocumentKeydown(evt) {
   }
 }
 
-export { uploadForm, uploadHashtags, uploadComments };
+export { uploadForm, uploadHashtags, uploadComments, onCloseForm };
