@@ -44,11 +44,11 @@ const onCloseForm = () => {
 
 uploadCancel.addEventListener('click', onCloseForm);
 
-function onDocumentKeydown(evt) {
+export function onDocumentKeydown(evt) {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
     onCloseForm();
   }
 }
 
-export { uploadForm, uploadHashtags, uploadComments };
+export { uploadForm, uploadHashtags, uploadComments, onCloseForm };

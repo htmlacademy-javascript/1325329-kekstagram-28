@@ -5,6 +5,11 @@ const COMMENTS_MAX_COUNT = 140;
 const VALID_HASTHTAG_SYMBOLS = /^#[a-zа-яё0-9]{1,19}$/i;
 const ERROR_TEXT_TAGS = 'Неправильно заполнены хэштеги';
 const ERROR_TEXT_COMMENTS = 'Комментарий не может быть длинее 140 символов';
+const uploadSubmit = document.querySelector('#upload-submit');
+const SubmitButtonText = {
+  IDLE: 'Опубликовать',
+  SENDING: 'Загрузка...'
+};
 
 const pristine = new Pristine(uploadForm, {
   classTo: 'img-upload__field-wrapper',
@@ -45,10 +50,26 @@ pristine.addValidator(
   ERROR_TEXT_COMMENTS,
 );
 
-uploadForm.addEventListener('submit', (evt) => {
-  if (!pristine.validate()) {
+const blockSubmitButton = () => {
+  uploadSubmit.disabled = true;
+  uploadSubmit.textContent = SubmitButtonText.SENDING;
+};
+
+const unblockSubmitButton = () => {
+  uploadSubmit.disabled = false;
+  uploadSubmit.textContent = SubmitButtonText.IDLE;
+};
+
+const setOnFormSubmit = (onSucces) => {
+  uploadForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
-  }
-});
+    if (pristine.validate()) {
+      blockSubmitButton();
+      onSucces(new FormData(evt.target));
+    }
+  });
+};
+
+export { setOnFormSubmit, unblockSubmitButton };
 
 
