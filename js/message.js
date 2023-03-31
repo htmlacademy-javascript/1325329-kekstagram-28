@@ -2,9 +2,7 @@ import { isEscapeKey } from './util.js';
 import { onDocumentKeydown } from './upload.js';
 
 const successId = document.querySelector('#success').content;
-const succesNode = successId.cloneNode(true);
 const errorId = document.querySelector('#error').content;
-const errorNode = errorId.cloneNode(true);
 
 const onClickCloseModal = (evt) => {
   if (evt.target.matches('.success')) {
@@ -20,6 +18,7 @@ const closeSuccessMessage = () => {
 };
 
 const showSuccessMessage = () => {
+  const succesNode = successId.cloneNode(true);
   document.body.append(succesNode);
   const success = document.querySelector('.success');
   const successBtn = document.querySelector('.success__button');
@@ -39,6 +38,7 @@ const closeErrorMessage = () => {
 };
 
 const showErrorMessage = () => {
+  const errorNode = errorId.cloneNode(true);
   document.body.append(errorNode);
   const error = document.querySelector('.error');
   const errorBtn = document.querySelector('.error__button');
