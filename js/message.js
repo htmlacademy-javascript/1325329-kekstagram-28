@@ -1,15 +1,10 @@
-import { isEscapeKey } from './util';
+import { isEscapeKey } from './util.js';
 import { onDocumentKeydown } from './upload.js';
 
-
 const successId = document.querySelector('#success').content;
-const success = document.querySelector('.success');
-const successBtn = document.querySelector('.success__button');
 const succesNode = successId.cloneNode(true);
 const errorId = document.querySelector('#error').content;
 const errorNode = errorId.cloneNode(true);
-const error = document.querySelector('.error');
-const errorBtn = document.querySelector('.error__button');
 
 const onClickCloseModal = (evt) => {
   if (evt.target.matches('.success')) {
@@ -21,11 +16,13 @@ const onClickCloseModal = (evt) => {
 };
 
 const closeSuccessMessage = () => {
-  success.remove();
+  document.querySelector('.success').remove();
 };
 
-const showSuccesMessage = () => {
+const showSuccessMessage = () => {
   document.body.append(succesNode);
+  const success = document.querySelector('.success');
+  const successBtn = document.querySelector('.success__button');
   success.addEventListener('click', onClickCloseModal);
   successBtn.addEventListener('click', closeSuccessMessage);
   document.removeEventListener('keydown', onDocumentKeydown);
@@ -38,11 +35,13 @@ const showSuccesMessage = () => {
 };
 
 const closeErrorMessage = () => {
-  error.remove();
+  document.querySelector('.error').remove();
 };
 
 const showErrorMessage = () => {
   document.body.append(errorNode);
+  const error = document.querySelector('.error');
+  const errorBtn = document.querySelector('.error__button');
   error.addEventListener('click', onClickCloseModal);
   errorBtn.addEventListener('click', closeErrorMessage);
   document.removeEventListener('keydown', onDocumentKeydown);
@@ -54,4 +53,4 @@ const showErrorMessage = () => {
   });
 };
 
-export { showSuccesMessage, showErrorMessage };
+export { showSuccessMessage, showErrorMessage };

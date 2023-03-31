@@ -1,6 +1,4 @@
 import { uploadForm, uploadHashtags, uploadComments } from './upload.js';
-import { showAlert } from './util.js';
-import { sendData } from './api.js';
 
 const HASHTAG_MAX_COUNT = 5;
 const COMMENTS_MAX_COUNT = 140;
@@ -65,18 +63,13 @@ const unblockSubmitButton = () => {
 const setOnFormSubmit = (onSucces) => {
   uploadForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
-    if (!pristine.validate()) {
+    if (pristine.validate()) {
       blockSubmitButton();
-      sendData(new FormData(evt.target))
-        .then(onSucces)
-        .catch((err) => {
-          showAlert(err.message);
-        })
-        .finally(unblockSubmitButton);
+      onSucces(new FormData(evt.target));
     }
   });
 };
 
-export { setOnFormSubmit };
+export { setOnFormSubmit, unblockSubmitButton };
 
 
