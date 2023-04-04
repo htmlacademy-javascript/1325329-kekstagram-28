@@ -1,12 +1,12 @@
 import { renderingMiniatures } from './miniatures-mini.js';
 import { renderingBigMiniatures } from './miniatures-full.js';
-import { showAlert } from './util.js';
 import { showSuccessMessage, showErrorMessage } from './message.js';
-import { onCloseForm } from './upload.js';
 import { setOnFormSubmit, unblockSubmitButton } from './validate.js';
-import './scale.js';
-import './slider.js';
+import { init, getSortedPictures } from './sort.js';
 import { sendData, getData } from './api.js';
+import { onCloseForm } from './upload.js';
+import { showAlert, debounce, TIMEOUT_DELAY } from './util.js';
+import './upload-img.js';
 
 setOnFormSubmit(async (data) => {
   try {
@@ -15,14 +15,17 @@ setOnFormSubmit(async (data) => {
     unblockSubmitButton();
     showSuccessMessage();
   } catch {
+    unblockSubmitButton();
     showErrorMessage();
   }
 });
 
 try {
   const data = await getData();
-  renderingMiniatures(data);
-  renderingBigMiniatures(data);
+  const debouncedRenderGallery = debounce(renderingMiniatures, TIMEOUT_DELAY);
+  init(data, debouncedRenderGallery);
+  renderingMiniatures(getSortedPictures());
+  renderingBigMiniatures(getSortedPictures());
 } catch (err) {
   showAlert(err.message);
 }
