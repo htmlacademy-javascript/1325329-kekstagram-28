@@ -49,7 +49,7 @@ bigPicturesClose.addEventListener('click', () => {
 
 document.addEventListener('keydown', (evt) => {
   if (isEscapeKey(evt)) {
-    bigPicturesContainer.classList.add('hidden');
+    onClosePictures();
   }
 });
 

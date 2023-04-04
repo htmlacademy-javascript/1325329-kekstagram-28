@@ -1,13 +1,14 @@
 const ALERT_SHOW_TIME = 5000;
 const TIMEOUT_DELAY = 500;
+const RANDOM_INTEGER_NUMBER = 1;
 
-const getRandomInteger = (min, max) => Math.floor(Math.random() * max - min + 1) + min;
+const getRandomInteger = (min, max) => Math.floor(Math.random() * max - min + RANDOM_INTEGER_NUMBER) + min;
 
 const createRandomIdGenerator = (min, max) => {
   const previousValues = [];
   return function () {
     let currentValue = getRandomInteger(min, max);
-    if (previousValues.length >= (max - min + 1)) {
+    if (previousValues.length >= (max - min + RANDOM_INTEGER_NUMBER)) {
 
       return null;
     }
@@ -33,9 +34,7 @@ const showAlert = (message) => {
   alertContainer.style.fontSize = '30px';
   alertContainer.style.textAlign = 'center';
   alertContainer.style.backgroundColor = 'red';
-
   alertContainer.textContent = message;
-
   document.body.append(alertContainer);
 
   setTimeout(() => {
