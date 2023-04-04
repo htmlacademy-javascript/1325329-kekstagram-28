@@ -6,6 +6,7 @@ import { onCloseForm } from './upload.js';
 import { setOnFormSubmit, unblockSubmitButton } from './validate.js';
 import './scale.js';
 import './slider.js';
+import { init, getSortedPictures } from './sort.js';
 import { sendData, getData } from './api.js';
 
 setOnFormSubmit(async (data) => {
@@ -15,13 +16,15 @@ setOnFormSubmit(async (data) => {
     unblockSubmitButton();
     showSuccessMessage();
   } catch {
+    unblockSubmitButton();
     showErrorMessage();
   }
 });
 
 try {
   const data = await getData();
-  renderingMiniatures(data);
+  init(data);
+  renderingMiniatures(getSortedPictures());
   renderingBigMiniatures(data);
 } catch (err) {
   showAlert(err.message);

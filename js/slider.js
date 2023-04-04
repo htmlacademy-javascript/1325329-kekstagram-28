@@ -72,4 +72,4 @@ const onEffectChange = (evt) => {
 effectsElement.addEventListener('change', onEffectChange);
 sliderElement.noUiSlider.on('update', onSliderUpdate);
 
-export { resetSlider };
+export { resetSlider, sliderImageElement };
