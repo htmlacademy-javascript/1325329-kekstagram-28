@@ -38,7 +38,6 @@ const onCloseForm = () => {
   resetSlider();
   uploadOverlay.classList.add('hidden');
   body.classList.remove('modal-open');
-  document.addEventListener('keydown', onDocumentKeydown);
   uploadFile.value = '';
 };
 
