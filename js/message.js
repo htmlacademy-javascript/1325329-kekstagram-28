@@ -6,33 +6,29 @@ const errorId = document.querySelector('#error').content;
 
 const onSuccesKeydown = (evt) => {
   if (isEscapeKey(evt)) {
-    document.querySelector('.success').remove();
-    document.removeEventListener('keydown', onSuccesKeydown);
+    closeSuccessMessage();
   }
 };
 
 const onErrorKeydown = (evt) => {
   if (isEscapeKey(evt)) {
-    document.querySelector('.error').remove();
-    document.removeEventListener('keydown', onErrorKeydown);
+    closeErrorMessage();
   }
 };
 
 const onOutClickCloseModal = (evt) => {
   if (evt.target.matches('.success')) {
-    document.querySelector('.success').remove();
-    document.removeEventListener('keydown', onSuccesKeydown);
+    closeSuccessMessage();
   }
   if (evt.target.matches('.error')) {
-    document.querySelector('.error').remove();
-    document.removeEventListener('keydown', onErrorKeydown);
+    closeErrorMessage();
   }
 };
 
-const closeSuccessMessage = () => {
+function closeSuccessMessage() {
   document.querySelector('.success').remove();
   document.removeEventListener('keydown', onSuccesKeydown);
-};
+}
 
 const showSuccessMessage = () => {
   const succesNode = successId.cloneNode(true);
@@ -45,10 +41,11 @@ const showSuccessMessage = () => {
   document.addEventListener('keydown', onSuccesKeydown);
 };
 
-const closeErrorMessage = () => {
+function closeErrorMessage() {
   document.querySelector('.error').remove();
   document.removeEventListener('keydown', onErrorKeydown);
-};
+  document.addEventListener('keydown', onDocumentKeydown);
+}
 
 const showErrorMessage = () => {
   const errorNode = errorId.cloneNode(true);
