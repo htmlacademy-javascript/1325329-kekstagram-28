@@ -12,12 +12,12 @@ const body = document.querySelector('body');
 
 const onBlockEsc = () => {
   uploadComments.addEventListener('keydown', (evt) => {
-    if (evt.key === 'Escape') {
+    if (isEscapeKey(evt)) {
       evt.stopPropagation();
     }
   });
   uploadHashtags.addEventListener('keydown', (evt) => {
-    if (evt.key === 'Escape') {
+    if (isEscapeKey(evt)) {
       evt.stopPropagation();
     }
   });
