@@ -19,15 +19,14 @@ const renderingBigMiniatures = (data) => {
       const correctDescription = data.find((item) => item.id === Number(target.dataset.id));
       bigPicturesContainer.classList.remove('hidden');
       moreComments.classList.remove('hidden');
-
       bigPicturesImg.src = correctDescription.url;
       bigPicturesImg.alt = correctDescription.description;
       picturesCaption.textContent = correctDescription.description;
       bigPicturesLikes.textContent = correctDescription.likes;
       bigPicturesComments.textContent = correctDescription.comments.length;
       socialComments.innerHTML = '';
-
       document.body.classList.add('modal-open');
+      document.addEventListener('keydown', onDocumentKeydown);
       createComment(correctDescription.comments, socialComments);
       loadComments();
     }
@@ -41,16 +40,18 @@ const onClosePictures = () => {
   bigPicturesContainer.classList.add('hidden');
   document.body.classList.remove('modal-open');
   moreComments.classList.remove('hidden');
+  document.removeEventListener('keydown', onDocumentKeydown);
 };
 
 bigPicturesClose.addEventListener('click', () => {
   onClosePictures();
 });
 
-document.addEventListener('keydown', (evt) => {
+function onDocumentKeydown(evt) {
   if (isEscapeKey(evt)) {
+    evt.preventDefault();
     onClosePictures();
   }
-});
+}
 
 export { renderingBigMiniatures };
