@@ -1,24 +1,5 @@
 const ALERT_SHOW_TIME = 5000;
 const TIMEOUT_DELAY = 500;
-const RANDOM_INTEGER_NUMBER = 1;
-
-const getRandomInteger = (min, max) => Math.floor(Math.random() * max - min + RANDOM_INTEGER_NUMBER) + min;
-
-const createRandomIdGenerator = (min, max) => {
-  const previousValues = [];
-  return function () {
-    let currentValue = getRandomInteger(min, max);
-    if (previousValues.length >= (max - min + RANDOM_INTEGER_NUMBER)) {
-
-      return null;
-    }
-    while (previousValues.includes(currentValue)) {
-      currentValue = getRandomInteger(min, max);
-    }
-    previousValues.push(currentValue);
-    return currentValue;
-  };
-};
 
 const isEscapeKey = (evt) => evt.key === 'Escape';
 const isEnterKey = (evt) => evt.key === 'Enter';
@@ -50,5 +31,5 @@ function debounce(callback, timeoutDelay) {
   };
 }
 
-export { getRandomInteger, createRandomIdGenerator, isEscapeKey, isEnterKey, showAlert, debounce, TIMEOUT_DELAY };
+export { isEscapeKey, isEnterKey, showAlert, debounce, TIMEOUT_DELAY };
 

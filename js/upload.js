@@ -1,6 +1,7 @@
 import { isEscapeKey } from './util.js';
 import { resetScale } from './scale.js';
 import { resetSlider } from './slider.js';
+import { resetPristine } from './validate.js';
 
 const uploadForm = document.querySelector('.img-upload__form');
 const uploadFile = uploadForm.querySelector('#upload-file');
@@ -12,12 +13,12 @@ const body = document.querySelector('body');
 
 const onBlockEsc = () => {
   uploadComments.addEventListener('keydown', (evt) => {
-    if (evt.key === 'Escape') {
+    if (isEscapeKey(evt)) {
       evt.stopPropagation();
     }
   });
   uploadHashtags.addEventListener('keydown', (evt) => {
-    if (evt.key === 'Escape') {
+    if (isEscapeKey(evt)) {
       evt.stopPropagation();
     }
   });
@@ -36,8 +37,10 @@ const onCloseForm = () => {
   uploadForm.reset();
   resetScale();
   resetSlider();
+  resetPristine();
   uploadOverlay.classList.add('hidden');
   body.classList.remove('modal-open');
+  document.removeEventListener('keydown', onDocumentKeydown);
   uploadFile.value = '';
 };
 

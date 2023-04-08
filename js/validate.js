@@ -1,15 +1,16 @@
-import { uploadForm, uploadHashtags, uploadComments } from './upload.js';
-
 const HASHTAG_MAX_COUNT = 5;
 const COMMENTS_MAX_COUNT = 140;
 const VALID_HASTHTAG_SYMBOLS = /^#[a-zа-яё0-9]{1,19}$/i;
 const ERROR_TEXT_TAGS = 'Неправильно заполнены хэштеги';
 const ERROR_TEXT_COMMENTS = 'Комментарий не может быть длинее 140 символов';
-const uploadSubmit = document.querySelector('#upload-submit');
 const SubmitButtonText = {
   IDLE: 'Опубликовать',
   SENDING: 'Загрузка...'
 };
+const uploadSubmit = document.querySelector('#upload-submit');
+const uploadForm = document.querySelector('.img-upload__form');
+const uploadComments = uploadForm.querySelector('.text__description');
+const uploadHashtags = uploadForm.querySelector('.text__hashtags');
 
 const pristine = new Pristine(uploadForm, {
   classTo: 'img-upload__field-wrapper',
@@ -70,6 +71,10 @@ const setOnFormSubmit = (onSucces) => {
   });
 };
 
-export { setOnFormSubmit, unblockSubmitButton };
+const resetPristine = () => {
+  pristine.reset();
+};
+
+export { setOnFormSubmit, unblockSubmitButton, resetPristine };
 
 
